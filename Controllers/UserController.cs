@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhyndDemo_v2.Data;
+using PhyndDemo_v2.DTOs;
 using PhyndDemo_v2.Models;
 using System;
 using System.Collections.Generic;
@@ -15,19 +17,20 @@ namespace PhyndDemo_v2.Controllers
     public class UserController : ControllerBase
     {
         private readonly phynd2Context context;
+        private readonly IMapper mapper;
 
-        public UserController(phynd2Context context)
+        public UserController(phynd2Context context,IMapper mapper)
         {
             this.context = context;
-
+            this.mapper = mapper;
         }
 
         [HttpGet] 
-        public async Task<ActionResult<List<User>>> Get()
+        public async Task<ActionResult<List<UserDTO>>> Get()
         {
             var users = await context.Users.AsNoTracking().ToListAsync();
-            //var genresDTOs = mapper.Map<List<GenreDTO>>(genres);
-            return users;
+            var userDTOs = mapper.Map<List<UserDTO>>(users);
+            return userDTOs;
 
         }
 
