@@ -140,3 +140,8 @@ C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreap
 C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\obj\Debug\netcoreapp3.1\PhyndDemo_v2.MvcApplicationPartsAssemblyInfo.cs

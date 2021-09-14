@@ -58,5 +58,28 @@ namespace PhyndDemo_v2.Controllers
 
             return new CreatedAtRouteResult("getuser", new { user.Id }, User);
         }
+
+        [HttpPut("{Id:int}")]
+        public async Task<ActionResult> Put(int Id, [FromBody] UserDTO user)
+        {
+            var putuser = mapper.Map<User>(user);
+            putuser.Id = Id;
+            context.Entry(putuser).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var exist = await context.Users.AnyAsync(x => x.Id == id);
+            if (!exist)
+            {
+                return NotFound();
+            }
+            context.Remove(new User() { Id = id });
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
