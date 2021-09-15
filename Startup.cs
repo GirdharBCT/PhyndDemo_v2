@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PhyndDemo_v2.Data;
+using PhyndDemo_v2.Managers;
+using PhyndDemo_v2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,9 @@ namespace PhyndDemo_v2
             services.AddDbContext<phynd2Context>(options =>
             options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
 
+
+            services.AddScoped<IDataRepository, UserManager>();
+
             services.AddAutoMapper(typeof(Startup));
             
             services.AddControllers();
@@ -41,7 +46,8 @@ namespace PhyndDemo_v2
             });
 
             //Swagger Documentation
-            services.AddSwaggerGen(c => {
+            services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PhyndDemo_v2", Version = "v1" });
             });
 

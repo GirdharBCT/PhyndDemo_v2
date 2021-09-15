@@ -12,7 +12,9 @@ namespace PhyndDemo_v2.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<User, UserDTO>();
+            CreateMap<User, UserDTO>().ReverseMap();
+
+            CreateMap<UserCreationDTO, User>();
         }
     }
 }

@@ -28,9 +28,6 @@ namespace PhyndDemo_v2.Controllers
             //var genresDTOs = mapper.Map<List<GenreDTO>>(genres);
             return providers;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

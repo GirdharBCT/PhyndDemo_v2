@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PhyndDemo_v2.Data;
 using PhyndDemo_v2.DTOs;
 using PhyndDemo_v2.Models;
+using PhyndDemo_v2.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,69 +17,132 @@ namespace PhyndDemo_v2.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly phynd2Context context;
-        private readonly IMapper mapper;
+        private readonly IDataRepository dataRepository;
 
-        public UserController(phynd2Context context,IMapper mapper)
+        public UserController(IDataRepository dataRepository)
         {
-            this.context = context;
-            this.mapper = mapper;
+            this.dataRepository = dataRepository;
         }
 
         [HttpGet] 
-        public async Task<ActionResult<List<UserDTO>>> Get()
+        public IActionResult Get()
         {
-            var users = await context.Users.AsNoTracking().ToListAsync();
-            var userDTOs = mapper.Map<List<UserDTO>>(users);
-            return userDTOs;
+            {//var users = await context.Users.AsNoTracking().ToListAsync();
+             //var userDTOs = mapper.Map<List<UserDTO>>(users);
+             //return userDTOs;
+            }
+            IEnumerable<User> users = dataRepository.GetUsers();
+            return Ok(users);
 
         }
 
-        [HttpGet("{Id:int}", Name = "getUser")] 
-        public async Task<ActionResult<User>> Get(int Id)
+        [HttpGet("{Id:int}", Name = "getUser")]
+        public IActionResult Get(int Id)
         {
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == Id);
+            {//var user = await context.Users.FirstOrDefaultAsync(x => x.Id == Id);
 
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
+            ////var genreDTO = mapper.Map<GenreDTO>(genre);
+            //return user;
+            }
+            User user = dataRepository.GetUser(Id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User record not found");
             }
-            //var genreDTO = mapper.Map<GenreDTO>(genre);
-
-            return user;
+            return Ok(user);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] User user)
+        public IActionResult Post([FromBody] UserDTO user)
         {
-            //var genre = mapper.Map<Genre>(genreCreation);
-            context.Add(user);
-            await context.SaveChangesAsync();
-            //var genreDTO = mapper.Map<GenreDTO>(genre);
+            {////var genre = mapper.Map<Genre>(genreCreation);
+             //context.Add(user);
+             //await context.SaveChangesAsync();
+             ////var genreDTO = mapper.Map<GenreDTO>(genre);
 
-            return new CreatedAtRouteResult("getuser", new { user.Id }, User);
+                //return new CreatedAtRouteResult("getuser", new { user.Id }, User);
+            }
+            if (user == null)
+            {
+                return BadRequest("User is null.");
+            }
+            dataRepository.Add(user);
+            //return new CreatedAtRouteResult("getuser", new { user.Id }, User);
+            return CreatedAtRoute("GetUser", new { id = user.Id }, user);
+
         }
 
-        [HttpPut("{Id:int}")]
-        public async Task<ActionResult> Put(int Id, [FromBody] UserDTO user)
+        [HttpPut("{Id}")]
+        public IActionResult Put(int Id, [FromBody] UserDTO user)
         {
-            var putuser = mapper.Map<User>(user);
-            putuser.Id = Id;
-            context.Entry(putuser).State = EntityState.Modified;
-            await context.SaveChangesAsync();
-            return NoContent();
+            {//var putuser = mapper.Map<User>(user);
+             //putuser.Id = Id;
+             //context.Entry(putuser).State = EntityState.Modified;
+             //await context.SaveChangesAsync();
+             //return NoContent();
+             //--------------------------------------
+
+                //if (user == null)
+                //{
+                //    return BadRequest("User is null.");
+                //}
+                //User userToUpdate = await context.Users.FirstOrDefaultAsync(x => x.Id == Id);
+                //if (userToUpdate == null)
+                //{
+                //    return NotFound("User not found.");
+                //}
+                //dataRepository.Update(userToUpdate, user);
+                //return Accepted();
+            }
+
+
+            if (user == null)
+            {
+                return BadRequest("User is null.");
+            }
+            User userToUpdate = dataRepository.GetUser(Id);
+            if (userToUpdate == null)
+            {
+                return NotFound("User not found.");
+            }
+            dataRepository.Update(userToUpdate, user);
+            return Accepted();
+            {//var userDB = await context.Users.FirstOrDefaultAsync(x => x.Id == Id);
+
+                //if (userDB == null) { return NotFound(); }
+                //var putuser = mapper.Map<User>(user);
+                //putuser.Id = Id;
+                //context.Entry(putuser).State = EntityState.Modified;
+                //await context.SaveChangesAsync();
+                //return NoContent();
+
+                //userDB = mapper.Map(UserCreationDTO, userDB);
+            }
+
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var exist = await context.Users.AnyAsync(x => x.Id == id);
-            if (!exist)
-            {
-                return NotFound();
+            {//var exist = await context.Users.AnyAsync(x => x.Id == id);
+             //if (!exist)
+             //{
+             //    return NotFound();
+             //}
+             //context.Remove(new User() { Id = id });
+             //await context.SaveChangesAsync();
+             //return NoContent();
             }
-            context.Remove(new User() { Id = id });
-            await context.SaveChangesAsync();
+            User user = dataRepository.GetUser(id);
+            if (user == null)
+            {
+                return NotFound("User record not found.");
+            }
+            dataRepository.Delete(user);
             return NoContent();
         }
     }

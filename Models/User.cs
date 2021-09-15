@@ -12,6 +12,8 @@ namespace PhyndDemo_v2.Models
     [Index(nameof(UserHospitalId), Name = "userHospitalId")]
     public partial class User
     {
+        internal string firstName;
+
         public User()
         {
             Userroles = new HashSet<Userrole>();
