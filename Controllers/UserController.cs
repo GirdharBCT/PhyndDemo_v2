@@ -10,18 +10,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PhyndDemo_v2.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PhyndDemo_v2.Controllers
 {
+    [Authorize]
     [Route("users")]
     [ApiController]
+
     public class UserController : ControllerBase
     {
-        private readonly IDataRepository dataRepository;
+        private readonly IUserRepository dataRepository;
+        private readonly IMapper mapper;
 
-        public UserController(IDataRepository dataRepository)
+        public UserController(IUserRepository dataRepository,IMapper mapper)
         {
             this.dataRepository = dataRepository;
+            this.mapper = mapper;
         }
 
         [HttpGet] 
@@ -144,6 +150,13 @@ namespace PhyndDemo_v2.Controllers
             }
             dataRepository.Delete(user);
             return NoContent();
+        }
+
+        [HttpGet("func")]
+        public ActionResult<IEnumerable<UserDTO>> GetUsers([FromQuery] Params userParams)
+        {
+            var userfromRepo = dataRepository.GetUsers(userParams);
+            return Ok(mapper.Map<IEnumerable<UserDTO>>(userfromRepo));
         }
     }
 }

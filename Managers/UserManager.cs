@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PhyndDemo_v2.Data;
 using PhyndDemo_v2.DTOs;
+using PhyndDemo_v2.Helpers;
 using PhyndDemo_v2.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PhyndDemo_v2.Managers
 {
-    public class UserManager : IDataRepository
+    public class UserManager : IUserRepository
     {
         private readonly phynd2Context context;
         private readonly IMapper mapper;
@@ -69,19 +70,49 @@ namespace PhyndDemo_v2.Managers
         //    throw new NotImplementedException();
         //}
 
-        public IEnumerable<User> GetUsers(string sortByfirstName, string sortBylastName, string search)
+        public IEnumerable<User> GetUsers(Params userParams)
         {
-            throw new NotImplementedException();
+            if (userParams == null)
+            {
+                throw new ArgumentNullException(nameof(userParams));
+            }
+
+            if (string.IsNullOrWhiteSpace(userParams.sortByFirstName)
+                && string.IsNullOrWhiteSpace(userParams.sortByLastName)
+                && string.IsNullOrWhiteSpace(userParams.Search))
+            {
+                return GetUsers();
+            }
+
+            var collection = context.Users as IQueryable<User>;
+            if (!string.IsNullOrWhiteSpace(userParams.sortByFirstName))
+            {
+                var firstName = userParams.sortByFirstName.Trim();
+                collection = collection.Where(a => a.FirstName == firstName);
+            }
+            if (!string.IsNullOrWhiteSpace(userParams.sortByLastName))
+            {
+
+                var lastName = userParams.sortByLastName.Trim();
+                collection = collection.Where(a => a.LastNmae == lastName);
+
+            }
+
+            if (!string.IsNullOrWhiteSpace(userParams.Search))
+            {
+                var search = userParams.Search.Trim();
+                return collection.Where(a => a.FirstName.Contains(search) || a.LastNmae.Contains(search));
+            }
+
+            
+            return collection.ToList();
+
         }
 
-        public IEnumerable<Provider> GetProviders(string sortByfirstName, string sortBylastName, string search)
-        {
-            throw new NotImplementedException();
-        }
 
-        public User CheckUser(string email, string password)
+        public User LoginUser(string email, string password)
         {
-            throw new NotImplementedException();
+            return context.Users.SingleOrDefault(u => u.Email == email & u.Password == password);
         }
 
     }

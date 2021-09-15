@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5Fcs4/oEKNf7aR8QFSMgM5/nlE0SSvJzS7CPpUq4qP3sBT0iu2bcXEXqD/aGk1ilnxMIPlbD1yHyg5q6t1/L1w==",
+  "dgSpecHash": "Wv4aLoewfsiXlQh947uqcHhOYPxd8snhNb1Tmm+BqoiXXlw8YoN2oiIPN93cTclpqCG+R3oIXnD1ttvqpoFyjQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Girdhar.Sahu\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2\\PhyndDemo_v2.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\Girdhar.Sahu\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\Girdhar.Sahu\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\Girdhar.Sahu\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\Girdhar.Sahu\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.19\\microsoft.aspnetcore.authentication.jwtbearer.3.1.19.nupkg.sha512",
     "C:\\Users\\Girdhar.Sahu\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Girdhar.Sahu\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\Girdhar.Sahu\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",

@@ -1,4 +1,5 @@
 ﻿using PhyndDemo_v2.DTOs;
+using PhyndDemo_v2.Helpers;
 using PhyndDemo_v2.Models;
 using System;
 using System.Collections.Generic;
@@ -7,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace PhyndDemo_v2.Managers
 {
-    public interface IDataRepository
+    public interface IUserRepository
     {
         IEnumerable<User> GetUsers();
         User GetUser(int id);
         void Add(UserDTO entity);
         void Update(User dbentity, UserDTO entity);
         void Delete(User entity);
-        IEnumerable<User> GetUsers(string sortByfirstName, string sortBylastName, string search);
-        IEnumerable<Provider> GetProviders(string sortByfirstName, string sortBylastName, string search);
-        User CheckUser(string email, string password);
+        IEnumerable<User> GetUsers(Params userParams);
+        User LoginUser(string email, string password);
     }
 }
