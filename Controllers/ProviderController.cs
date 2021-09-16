@@ -43,19 +43,14 @@ namespace PhyndDemo_v2.Controllers
         public IActionResult Get(int Id)
         {
             var providerfromRepo = dataRepository.GetProvider(Id);
-
-            if (providerfromRepo == null)
-            {
-                return NotFound();
-            }
             return Ok(mapper.Map<ProviderCreationDTO>(providerfromRepo)); ;
         }
 
         [HttpPost]
-        public ActionResult<ProviderDTO> Post(Provider provider)
+        public ActionResult<ProviderDTO> Post(ProviderDTO provider)
         {
-            dataRepository.AddProvider(provider);
-
+            var newProvider = mapper.Map<Provider>(provider);
+            dataRepository.AddProvider(newProvider);
             return CreatedAtRoute("GetProvider",new{Id = provider.Id},provider);
         }
 
@@ -74,6 +69,7 @@ namespace PhyndDemo_v2.Controllers
         [HttpPut("{Id}")]
         public IActionResult Put(int Id, [FromBody] ProviderDTO providerDTO)
         {
+
 
             if (providerDTO == null)
             {
