@@ -9,7 +9,7 @@ using PhyndDemo_v2.DTOs;
 
 namespace PhyndDemo_v2.Managers
 {
-    public class ProviderManager
+    public class ProviderManager : IProviderRepository
     {
         private readonly phynd2Context context;
         private readonly IMapper mapper;
@@ -32,10 +32,6 @@ namespace PhyndDemo_v2.Managers
 
         public void AddProvider(Provider provider)
         { 
-            if(provider == null)
-            { 
-                throw new ArgumentNullException(nameof(provider));
-            }
             var newProvider = mapper.Map<Provider>(provider);
             context.Providers.Add(newProvider);
             context.SaveChanges();
@@ -43,10 +39,6 @@ namespace PhyndDemo_v2.Managers
 
         public void DeleteProvider(Provider provider)
         {
-            if (provider == null)
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
             context.Providers.Remove(provider);
             context.SaveChanges();
         }

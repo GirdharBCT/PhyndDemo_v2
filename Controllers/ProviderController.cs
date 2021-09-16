@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PhyndDemo_v2.DTOs;
+using AutoMapper;
 
 namespace PhyndDemo_v2.Controllers
 {
@@ -18,24 +19,28 @@ namespace PhyndDemo_v2.Controllers
     public class ProviderController : ControllerBase
     {
         //private readonly phynd2Context context;
-        private readonly ProviderManager dataRepository;
+        private readonly IProviderRepository dataRepository;
+        private readonly IMapper mapper;
 
-        public ProviderController(ProviderManager dataRepository)
+        public ProviderController(IProviderRepository dataRepository,IMapper mapper)
         {
             //this.context = context;
             this.dataRepository = dataRepository;
+            this.mapper = mapper;
         } 
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<IEnumerable<ProviderCreationDTO>> Get()
         {
-            IEnumerable<Provider> providers = dataRepository.GetProviders();
-            return Ok(providers);
+            var providers = dataRepository.GetProviders();
+            //IEnumerable<Provider> providers = dataRepository.GetProviders();
+            //return Ok(providers);
+            return Ok(mapper.Map<IEnumerable<ProviderCreationDTO>>(providers));
         }
 
         
         [HttpGet("{Id}", Name = "GetProvider")] 
-        public ActionResult Get(int Id)
+        public IActionResult Get(int Id)
         {
             var providerfromRepo = dataRepository.GetProvider(Id);
 
@@ -43,26 +48,24 @@ namespace PhyndDemo_v2.Controllers
             {
                 return NotFound();
             }
-            return Ok(providerfromRepo);
+            return Ok(mapper.Map<ProviderCreationDTO>(providerfromRepo)); ;
         }
 
         [HttpPost]
-        public ActionResult<Provider> Post(Provider provider)
+        public ActionResult<ProviderDTO> Post(Provider provider)
         {
             dataRepository.AddProvider(provider);
-            //dataRepository.SaveChanges();
 
             return CreatedAtRoute("GetProvider",new{Id = provider.Id},provider);
         }
 
-        [HttpDelete]
+        [HttpDelete("id")]
         public IActionResult Delete(int id) 
         { 
             var provider=dataRepository.GetProvider(id);
             if(provider!=null)
             { 
                 dataRepository.DeleteProvider(provider);
-                //dataRepository.Save();
                 return Ok();
             }
             return NoContent();
