@@ -14,30 +14,27 @@ namespace PhyndDemo_v2.Controllers
     //[Authorize]
     [Route("providers")]
     [ApiController]
-    public class ProviderController : Controller
+    public class ProviderController : ControllerBase
     {
-        private readonly phynd2Context context;
+        //private readonly phynd2Context context;
         private readonly ProviderManager dataRepository;
 
-        public ProviderController(phynd2Context context,ProviderManager dataRepository)
+        public ProviderController(ProviderManager dataRepository)
         {
-            this.context = context;
+            //this.context = context;
             this.dataRepository = dataRepository;
         } 
 
         [HttpGet]
         public IActionResult Get()
         {
-            //var providers = await context.Providers.AsNoTracking().ToListAsync();
-            ////var genresDTOs = mapper.Map<List<GenreDTO>>(genres);
-            //return providers;
             IEnumerable<Provider> providers = dataRepository.GetProviders();
             return Ok(providers);
         }
 
         
         [HttpGet("{Id}", Name = "GetProvider")] 
-        public IActionResult Get(int Id)
+        public ActionResult Get(int Id)
         {
             var providerfromRepo = dataRepository.GetProvider(Id);
 
@@ -49,10 +46,10 @@ namespace PhyndDemo_v2.Controllers
         }
 
         [HttpPost]
-        public IActionResult<Provider> Post(Provider provider)
+        public ActionResult<Provider> Post(Provider provider)
         {
             dataRepository.AddProvider(provider);
-            dataRepository.Save();
+            //dataRepository.SaveChanges();
 
             return CreatedAtRoute("GetProvider",new{Id = provider.Id},provider);
         }
@@ -64,14 +61,14 @@ namespace PhyndDemo_v2.Controllers
             if(provider!=null)
             { 
                 dataRepository.DeleteProvider(provider);
-                dataRepository.Save();
+                //dataRepository.Save();
                 return Ok();
             }
             return NoContent();
         }
 
         [HttpPatch]
-        public IActionResult Edit(int id,Provider provider) {
+        public ActionResult Edit(int id,Provider provider) {
             var existingProvider=dataRepository.GetProvider(id);
             if (existingProvider != null) { 
                 provider.Id=existingProvider.Id;

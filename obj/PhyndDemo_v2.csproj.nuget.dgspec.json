@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Girdhar.Sahu\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2\\PhyndDemo_v2.csproj": {}
+    "C:\\Users\\Ashutosh.Gugnani\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Girdhar.Sahu\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2\\PhyndDemo_v2.csproj": {
+    "C:\\Users\\Ashutosh.Gugnani\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Girdhar.Sahu\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2\\PhyndDemo_v2.csproj",
+        "projectUniqueName": "C:\\Users\\Ashutosh.Gugnani\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2.csproj",
         "projectName": "PhyndDemo_v2",
-        "projectPath": "C:\\Users\\Girdhar.Sahu\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2\\PhyndDemo_v2.csproj",
-        "packagesPath": "C:\\Users\\Girdhar.Sahu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Girdhar.Sahu\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2\\obj\\",
+        "projectPath": "C:\\Users\\Ashutosh.Gugnani\\source\\repos\\PhyndDemo_v2\\PhyndDemo_v2.csproj",
+        "packagesPath": "C:\\Users\\Ashutosh.Gugnani\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ashutosh.Gugnani\\source\\repos\\PhyndDemo_v2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Girdhar.Sahu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ashutosh.Gugnani\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

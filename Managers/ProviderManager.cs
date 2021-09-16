@@ -24,7 +24,7 @@ namespace PhyndDemo_v2.Managers
             return context.Providers.ToList();
         }
         
-        public IEnumerable<Provider> GetProvider(int Id)
+        public Provider GetProvider(int Id)
         {
             return context.Providers.FirstOrDefault(a => a.Id == Id);
         }
@@ -36,6 +36,7 @@ namespace PhyndDemo_v2.Managers
                 throw new ArgumentNullException(nameof(provider));
             }
             context.Providers.Add(provider);
+            context.SaveChanges();
         }
 
         public void DeleteProvider(Provider provider)
@@ -45,11 +46,13 @@ namespace PhyndDemo_v2.Managers
                 throw new ArgumentNullException(nameof(provider));
             }
             context.Providers.Remove(provider);
+            context.SaveChanges();
         }
         
         public Provider EditProvider(Provider provider) {
             var existingProvider=GetProvider(provider.Id);
-            existingProvider.Firstname=provider.FirstName;
+            existingProvider.FirstName=provider.FirstName;
+            context.SaveChanges();
             return existingProvider;
         }
     }
