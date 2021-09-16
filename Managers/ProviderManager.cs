@@ -19,14 +19,14 @@ namespace PhyndDemo_v2.Managers
             this.mapper = mapper;
         }
 
-        p+ublic IEnumerable<Provider> GetProviders()
+        public IEnumerable<Provider> GetProviders()
         {
             return context.Providers.ToList();
         }
         
-        public IEnumerable<Provider> GetProvider(int id)
+        public IEnumerable<Provider> GetProvider(int Id)
         {
-            return context.Providers.FirstOrDefault(a => a.id == id);
+            return context.Providers.FirstOrDefault(a => a.Id == Id);
         }
 
         public void AddProvider(Provider provider)
@@ -36,6 +36,21 @@ namespace PhyndDemo_v2.Managers
                 throw new ArgumentNullException(nameof(provider));
             }
             context.Providers.Add(provider);
+        }
+
+        public void DeleteProvider(Provider provider)
+        {
+            if (provider == null)
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+            context.Providers.Remove(provider);
+        }
+        
+        public Provider EditProvider(Provider provider) {
+            var existingProvider=GetProvider(provider.Id);
+            existingProvider.Firstname=provider.FirstName;
+            return existingProvider;
         }
     }
 }

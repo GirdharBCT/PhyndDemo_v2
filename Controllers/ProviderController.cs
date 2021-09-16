@@ -39,7 +39,7 @@ namespace PhyndDemo_v2.Controllers
         [HttpGet("{Id}", Name = "GetProvider")] 
         public IActionResult Get(int Id)
         {
-            var providerfromRepo = ProviderManager.GetProvider(Id);
+            var providerfromRepo = dataRepository.GetProvider(Id);
 
             if (providerfromRepo == null)
             {
@@ -55,6 +55,29 @@ namespace PhyndDemo_v2.Controllers
             dataRepository.Save();
 
             return CreatedAtRoute("GetProvider",new{Id = provider.Id},provider);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id) 
+        { 
+            var provider=dataRepository.GetProvider(id);
+            if(provider!=null)
+            { 
+                dataRepository.DeleteProvider(provider);
+                dataRepository.Save();
+                return Ok();
+            }
+            return NoContent();
+        }
+
+        [HttpPatch]
+        public IActionResult Edit(int id,Provider provider) {
+            var existingProvider=dataRepository.GetProvider(id);
+            if (existingProvider != null) { 
+                provider.Id=existingProvider.Id;
+                dataRepository.EditProvider(provider);
+            }
+            return Ok(provider);
         }
     }
 }
