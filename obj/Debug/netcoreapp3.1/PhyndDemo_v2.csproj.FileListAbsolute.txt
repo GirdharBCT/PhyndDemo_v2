@@ -146,3 +146,5 @@ C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreap
 C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\obj\Debug\netcoreapp3.1\PhyndDemo_v2.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Girdhar.Sahu\source\repos\PhyndDemo_v2\PhyndDemo_v2\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Ashutosh.Gugnani\source\repos\PhyndDemo_v2\obj\Debug\netcoreapp3.1\PhyndDemo_v2.dll
+C:\Users\Ashutosh.Gugnani\source\repos\PhyndDemo_v2\obj\Debug\netcoreapp3.1\PhyndDemo_v2.pdb
