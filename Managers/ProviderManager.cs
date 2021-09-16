@@ -19,9 +19,23 @@ namespace PhyndDemo_v2.Managers
             this.mapper = mapper;
         }
 
-        public IEnumerable<Provider> GetProviders()
+        p+ublic IEnumerable<Provider> GetProviders()
         {
             return context.Providers.ToList();
+        }
+        
+        public IEnumerable<Provider> GetProvider(int id)
+        {
+            return context.Providers.FirstOrDefault(a => a.id == id);
+        }
+
+        public void AddProvider(Provider provider)
+        { 
+            if(provider == null)
+            { 
+                throw new ArgumentNullException(nameof(provider));
+            }
+            context.Providers.Add(provider);
         }
     }
 }

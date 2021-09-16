@@ -15,7 +15,7 @@ namespace PhyndDemo_v2.Controllers
     [Route("programs")]
     [ApiController]
     public class ProgramController : Controller
-    {
+    { 
         private readonly phynd2Context context;
         private readonly ProgamRepository dataRepository;
 
@@ -25,13 +25,12 @@ namespace PhyndDemo_v2.Controllers
             this.dataRepository = dataRepository;
         }
 
-        [HttpGet] //"providers"
+        [HttpGet]
         public IActionResult Get()
         {
             //var providers = await context.Providers.AsNoTracking().ToListAsync();
             ////var genresDTOs = mapper.Map<List<GenreDTO>>(genres);
             //return providers;
-
             IEnumerable<Program> program = dataRepository.GetPrograms();
             return Ok(programs);
         }

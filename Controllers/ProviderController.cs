@@ -23,18 +23,38 @@ namespace PhyndDemo_v2.Controllers
         {
             this.context = context;
             this.dataRepository = dataRepository;
-        }
+        } 
 
-        [HttpGet] //"providers"
+        [HttpGet]
         public IActionResult Get()
         {
             //var providers = await context.Providers.AsNoTracking().ToListAsync();
             ////var genresDTOs = mapper.Map<List<GenreDTO>>(genres);
             //return providers;
-
             IEnumerable<Provider> providers = dataRepository.GetProviders();
             return Ok(providers);
         }
+
         
+        [HttpGet("{Id}", Name = "GetProvider")] 
+        public IActionResult Get(int Id)
+        {
+            var providerfromRepo = ProviderManager.GetProvider(Id);
+
+            if (providerfromRepo == null)
+            {
+                return NotFound();
+            }
+            return Ok(providerfromRepo);
+        }
+
+        [HttpPost]
+        public IActionResult<Provider> Post(Provider provider)
+        {
+            dataRepository.AddProvider(provider);
+            dataRepository.Save();
+
+            return CreatedAtRoute("GetProvider",new{Id = provider.Id},provider);
+        }
     }
 }
