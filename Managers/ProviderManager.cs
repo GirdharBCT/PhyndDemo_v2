@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PhyndDemo_v2.DTOs;
 
 namespace PhyndDemo_v2.Managers
 {
@@ -35,7 +36,8 @@ namespace PhyndDemo_v2.Managers
             { 
                 throw new ArgumentNullException(nameof(provider));
             }
-            context.Providers.Add(provider);
+            var newProvider = mapper.Map<Provider>(provider);
+            context.Providers.Add(newProvider);
             context.SaveChanges();
         }
 
@@ -48,12 +50,21 @@ namespace PhyndDemo_v2.Managers
             context.Providers.Remove(provider);
             context.SaveChanges();
         }
-        
-        public Provider EditProvider(Provider provider) {
-            var existingProvider=GetProvider(provider.Id);
-            existingProvider.FirstName=provider.FirstName;
+
+        public void Update(Provider provider, ProviderDTO newProvider)
+        {
+            var entity = mapper.Map<Provider>(newProvider);
+
+            provider.FirstName = entity.FirstName;
+            provider.MiddleName = entity.MiddleName;
+            provider.LastName = entity.LastName;
+            provider.HospitalId = entity.HospitalId;
+            provider.CreatedBy = entity.CreatedBy;
+            provider.CreatedOn = entity.CreatedOn;
+            provider.ModifiedBy = entity.ModifiedBy;
+            provider.IsDeleted = entity.IsDeleted;
+
             context.SaveChanges();
-            return existingProvider;
         }
     }
 }

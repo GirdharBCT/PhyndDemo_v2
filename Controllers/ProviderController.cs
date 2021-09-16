@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PhyndDemo_v2.DTOs;
 
 namespace PhyndDemo_v2.Controllers
 {
@@ -67,14 +68,22 @@ namespace PhyndDemo_v2.Controllers
             return NoContent();
         }
 
-        [HttpPatch]
-        public ActionResult Edit(int id,Provider provider) {
-            var existingProvider=dataRepository.GetProvider(id);
-            if (existingProvider != null) { 
-                provider.Id=existingProvider.Id;
-                dataRepository.EditProvider(provider);
+        [HttpPut("{Id}")]
+        public IActionResult Put(int Id, [FromBody] ProviderDTO providerDTO)
+        {
+
+            if (providerDTO == null)
+            {
+                return BadRequest("Provider is null.");
             }
-            return Ok(provider);
+            Provider providerToUpdate = dataRepository.GetProvider(Id);
+            if (providerToUpdate == null)
+            {
+                return NotFound("Provider not found.");
+            }
+            dataRepository.Update(providerToUpdate, providerDTO);
+            return Accepted();
+
         }
     }
 }
