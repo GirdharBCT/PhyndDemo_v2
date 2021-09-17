@@ -38,7 +38,8 @@ namespace PhyndDemo_v2
 
 
             services.AddScoped<IUserRepository, UserManager>();
-            services.AddScoped<ProviderManager>();
+            services.AddScoped<IProviderRepository,ProviderManager>();
+            services.AddScoped<IProgramRepository,ProgramManager>();
 
             services.AddAutoMapper(typeof(Startup));
             
