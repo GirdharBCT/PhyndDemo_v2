@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PhyndDemo_v2.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("users")]
     [ApiController]
 
